@@ -11,6 +11,10 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CitySelector: typeof import('./src/components/CitySelector.vue')['default']
+    CurrentWeather: typeof import('./src/components/CurrentWeather.vue')['default']
+    ForecastList: typeof import('./src/components/ForecastList.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    WeatherBackground: typeof import('./src/components/WeatherBackground.vue')['default']
   }
 }

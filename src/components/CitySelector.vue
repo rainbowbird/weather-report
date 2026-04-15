@@ -65,7 +65,7 @@ watch(searchValue, (val) => {
 /**
  * 处理选择搜索建议
  */
-function handleSelect(value: string, option: any) {
+function handleSelect(_value: string, option: any) {
   const city = option.city as CityItem
   if (city) {
     searchValue.value = ''

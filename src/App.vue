@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { message, Spin } from 'ant-design-vue'
 import WeatherBackground from './components/WeatherBackground.vue'
 import CitySelector from './components/CitySelector.vue'
