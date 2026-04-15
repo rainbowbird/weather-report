@@ -51,7 +51,7 @@ const forecastList = computed(() => {
 <style scoped>
 .forecast-list {
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
 }
 
 .forecast-header {
