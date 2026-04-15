@@ -7,7 +7,7 @@ import type { CitySearchResponse, Weather7dResponse, WeatherNowResponse } from '
  * @returns 城市列表（包含城市 ID、经纬度、行政区划等信息）
  */
 export async function searchCity(keyword: string): Promise<CitySearchResponse> {
-  const { data } = await geoRequest.get('/v2/city/lookup', {
+  const { data } = await geoRequest.get('/geo/v2/city/lookup', {
     params: { location: keyword },
   })
   return data

@@ -49,12 +49,25 @@ const handleSearch = debounce(async (keyword: string) => {
         value: `${city.name} · ${city.adm1}`,
         city,
       }))
-    } else {
-      options.value = []
+      return
     }
-  } finally {
-    searching.value = false
+  } catch (err) {
+    console.warn('城市搜索 API 失败，降级为本地匹配:', err)
   }
+
+  // 降级：在预设城市中本地模糊匹配
+  const lowerKeyword = keyword.toLowerCase()
+  const matched = presetCities.filter(
+    (city) =>
+      city.name.includes(keyword) ||
+      city.adm1.includes(keyword) ||
+      city.name.toLowerCase().includes(lowerKeyword),
+  )
+  options.value = matched.map((city) => ({
+    value: `${city.name} · ${city.adm1}`,
+    city,
+  }))
+  searching.value = false
 }, 400)
 
 /** 监听输入变化触发搜索 */

@@ -49,9 +49,14 @@ async function loadWeather(city: CityItem) {
     currentCity.value = city
     currentWeather.value = nowRes.now
     forecastDaily.value = forecastRes.daily
-  } catch (err) {
-    message.error('网络请求失败，请检查 API Key 或网络连接')
-    console.error(err)
+  } catch (err: any) {
+    const apiError = err.response?.data
+    console.error('天气请求失败:', apiError || err.message || err)
+    if (apiError?.error?.title) {
+      message.error(`${apiError.error.title}: ${apiError.error.detail}`)
+    } else {
+      message.error('网络请求失败，请检查 API Key 或网络连接')
+    }
   } finally {
     loading.value = false
   }
@@ -72,7 +77,16 @@ async function init() {
     if (res.code === '200' && res.location && res.location.length > 0) {
       await loadWeather(res.location[0])
     } else {
-      message.error('初始化城市失败')
+      message.error(`初始化城市失败: code=${res.code}`)
+      console.error('searchCity 返回:', res)
+    }
+  } catch (err: any) {
+    const apiError = err.response?.data
+    console.error('初始化搜索失败:', apiError || err.message || err)
+    if (apiError?.error?.title) {
+      message.error(`${apiError.error.title}: ${apiError.error.detail}`)
+    } else {
+      message.error('初始化城市搜索失败，请检查 API Key 配置')
     }
   } finally {
     loading.value = false
