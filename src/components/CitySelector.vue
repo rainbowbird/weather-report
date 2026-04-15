@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { AutoComplete, Input } from 'ant-design-vue'
+import { SearchOutlined, LoadingOutlined } from '@ant-design/icons-vue'
 import { debounce } from '@/utils/debounce'
 import { searchCity } from '@/api/weather'
 import type { CityItem } from '@/types/weather'
@@ -53,6 +55,8 @@ const handleSearch = debounce(async (keyword: string) => {
     }
   } catch (err) {
     console.warn('城市搜索 API 失败，降级为本地匹配:', err)
+  } finally {
+    searching.value = false
   }
 
   // 降级：在预设城市中本地模糊匹配
@@ -67,7 +71,6 @@ const handleSearch = debounce(async (keyword: string) => {
     value: `${city.name} · ${city.adm1}`,
     city,
   }))
-  searching.value = false
 }, 400)
 
 /** 监听输入变化触发搜索 */
@@ -101,14 +104,15 @@ function selectPresetCity(city: CityItem) {
       <AutoComplete
         v-model:value="searchValue"
         :options="options"
-        placeholder="搜索城市，如：北京"
         style="width: 320px"
         @select="handleSelect"
       >
-        <template #suffix>
-          <SearchOutlined v-if="!searching" />
-          <LoadingOutlined v-else spin />
-        </template>
+        <Input placeholder="搜索城市，如：北京">
+          <template #suffix>
+            <SearchOutlined v-if="!searching" />
+            <LoadingOutlined v-else spin />
+          </template>
+        </Input>
       </AutoComplete>
     </div>
 
