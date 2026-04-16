@@ -7,7 +7,7 @@ import CurrentWeather from './components/CurrentWeather.vue'
 import ForecastList from './components/ForecastList.vue'
 import { searchCity, getWeatherNow, getWeather7d } from '@/api/weather'
 import type { CityItem, CurrentWeatherData, DailyWeather } from '@/types/weather'
-import { mapWeatherIcon } from '@/utils/weather'
+import { mapWeatherIcon, isLightBackground } from '@/utils/weather'
 
 /** 当前选中的城市 */
 const currentCity = ref<CityItem | null>(null)
@@ -24,6 +24,24 @@ const weatherType = computed(() => {
     return mapWeatherIcon(currentWeather.value.icon).type
   }
   return 'default'
+})
+
+/** 根据背景明暗动态生成文字与卡片颜色变量（方案 C） */
+const themeVars = computed(() => {
+  const isLight = isLightBackground(weatherType.value)
+  return {
+    '--weather-text': isLight ? 'rgba(40, 40, 45, 0.95)' : '#ffffff',
+    '--weather-text-secondary': isLight ? 'rgba(60, 60, 65, 0.8)' : 'rgba(255, 255, 255, 0.85)',
+    '--weather-text-shadow': isLight ? '0 1px 2px rgba(255, 255, 255, 0.4)' : '0 2px 8px rgba(0, 0, 0, 0.2)',
+    '--card-bg': isLight ? 'rgba(255, 255, 255, 0.55)' : 'rgba(255, 255, 255, 0.15)',
+    '--card-bg-hover': isLight ? 'rgba(255, 255, 255, 0.7)' : 'rgba(255, 255, 255, 0.25)',
+    '--card-border': isLight ? 'rgba(255, 255, 255, 0.6)' : 'rgba(255, 255, 255, 0.25)',
+    '--input-bg': isLight ? 'rgba(255, 255, 255, 0.75)' : 'rgba(0, 0, 0, 0.35)',
+    '--input-bg-focus': isLight ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.45)',
+    '--tag-bg': isLight ? 'rgba(255, 255, 255, 0.55)' : 'rgba(0, 0, 0, 0.3)',
+    '--tag-bg-hover': isLight ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.45)',
+    '--tag-text': isLight ? '#444' : '#fff',
+  }
 })
 
 /**
@@ -101,7 +119,7 @@ init()
 
   <div id="app" class="weather-app">
     <Spin :spinning="loading" size="large">
-      <div class="app-content">
+      <div class="app-content" :style="themeVars">
         <h1 class="app-title">🌈 天气预报</h1>
 
         <CitySelector
@@ -153,9 +171,9 @@ body {
 .app-title {
   font-size: 42px;
   font-weight: 700;
-  color: #fff;
+  color: var(--weather-text);
   margin: 0;
-  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  text-shadow: var(--weather-text-shadow);
   letter-spacing: -0.5px;
 }
 
@@ -171,7 +189,7 @@ body {
 }
 
 :deep(.ant-spin-dot-item) {
-  background-color: #fff;
+  background-color: var(--weather-text);
 }
 
 @media (max-width: 600px) {

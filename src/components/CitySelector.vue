@@ -81,7 +81,7 @@ watch(searchValue, (val) => {
 /**
  * 处理选择搜索建议
  */
-function handleSelect(_value: string, option: any) {
+function handleSelect(_value: any, option: any) {
   const city = option.city as CityItem
   if (city) {
     searchValue.value = ''
@@ -142,15 +142,20 @@ function selectPresetCity(city: CityItem) {
   border-radius: 24px;
   padding: 10px 16px;
   font-size: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border: none;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--input-bg);
+  color: var(--weather-text);
   backdrop-filter: blur(8px);
 }
 
+.search-row :deep(.ant-input::placeholder) {
+  color: var(--weather-text-secondary);
+}
+
 .search-row :deep(.ant-input:focus) {
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  background: var(--input-bg-focus);
 }
 
 .preset-row {
@@ -167,49 +172,23 @@ function selectPresetCity(city: CityItem) {
   font-size: 14px;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  background: rgba(255, 255, 255, 0.55);
-  color: #444;
+  background: var(--tag-bg);
+  color: var(--tag-text);
   backdrop-filter: blur(4px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .preset-tag:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--tag-bg-hover);
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
 .preset-tag.active {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--tag-bg-hover);
   color: #ff7eb3;
   font-weight: 600;
   transform: scale(1.08);
   box-shadow: 0 4px 16px rgba(255, 126, 179, 0.35);
-}
-
-@media (prefers-color-scheme: dark) {
-  .search-row :deep(.ant-input) {
-    background: rgba(30, 30, 40, 0.75);
-    color: #f3f4f6;
-  }
-
-  .search-row :deep(.ant-input::placeholder) {
-    color: #9ca3af;
-  }
-
-  .preset-tag {
-    background: rgba(30, 30, 40, 0.55);
-    color: #e5e7eb;
-  }
-
-  .preset-tag:hover {
-    background: rgba(50, 50, 65, 0.8);
-  }
-
-  .preset-tag.active {
-    background: rgba(60, 50, 70, 0.95);
-    color: #ffb3d9;
-    box-shadow: 0 4px 16px rgba(255, 126, 179, 0.25);
-  }
 }
 </style>

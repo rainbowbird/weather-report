@@ -57,10 +57,10 @@ const forecastList = computed(() => {
 .forecast-header {
   font-size: 18px;
   font-weight: 600;
-  color: #fff;
+  color: var(--weather-text);
   margin-bottom: 16px;
   text-align: center;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-shadow: var(--weather-text-shadow);
 }
 
 .forecast-scroll {
@@ -91,11 +91,11 @@ const forecastList = computed(() => {
   padding: 20px 14px;
   border-radius: 24px;
   text-align: center;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.12);
+  color: var(--weather-text);
+  background: var(--card-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--card-border);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   opacity: 0;
@@ -112,7 +112,7 @@ const forecastList = computed(() => {
 
 .forecast-card:hover {
   transform: translateY(-8px) scale(1.03);
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--card-bg-hover);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
 }
 
@@ -146,7 +146,7 @@ const forecastList = computed(() => {
 }
 
 .temp-high {
-  color: #fff;
+  color: var(--weather-text);
 }
 
 .temp-divider {

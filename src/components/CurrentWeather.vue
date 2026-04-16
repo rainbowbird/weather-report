@@ -53,11 +53,11 @@ const weatherIcon = computed(() => mapWeatherIcon(props.weather.icon))
   padding: 40px 32px;
   border-radius: 32px;
   text-align: center;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.15);
+  color: var(--weather-text);
+  background: var(--card-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--card-border);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -75,7 +75,7 @@ const weatherIcon = computed(() => mapWeatherIcon(props.weather.icon))
   font-size: 28px;
   font-weight: 600;
   margin-bottom: 12px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-shadow: var(--weather-text-shadow);
 }
 
 .main-info {
@@ -91,7 +91,7 @@ const weatherIcon = computed(() => mapWeatherIcon(props.weather.icon))
   font-weight: 700;
   line-height: 1;
   letter-spacing: -2px;
-  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  text-shadow: var(--weather-text-shadow);
 }
 
 .unit {
@@ -123,12 +123,12 @@ const weatherIcon = computed(() => mapWeatherIcon(props.weather.icon))
 .detail-item {
   padding: 12px 8px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(128, 128, 128, 0.1);
   transition: background 0.3s ease;
 }
 
 .detail-item:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(128, 128, 128, 0.18);
 }
 
 .detail-label {

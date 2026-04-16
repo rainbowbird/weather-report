@@ -66,6 +66,15 @@ export function getWeatherGradient(type: WeatherType): string {
 }
 
 /**
+ * 判断天气背景是否为浅色（浅色背景下需使用深色文字以获得更好对比度）
+ * @param type 天气背景类型
+ * @returns 是否为浅色背景
+ */
+export function isLightBackground(type: WeatherType): boolean {
+  return ['sunny', 'cloudy', 'snowy', 'foggy', 'default'].includes(type)
+}
+
+/**
  * 格式化日期为 "MM-dd" 和星期
  * @param dateStr 日期字符串，如 "2024-01-15"
  * @returns { date: string, weekday: string }
