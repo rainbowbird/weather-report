@@ -130,3 +130,69 @@ export interface WeatherNowResponse {
   /** 当前实时天气数据 */
   now: CurrentWeatherData
 }
+
+/** 天气预警信息 */
+export interface WeatherWarning {
+  /** 预警 ID */
+  id: string
+  /** 预警发布单位 */
+  sender: string
+  /** 预警发布时间 */
+  pubTime: string
+  /** 预警标题 */
+  title: string
+  /** 预警详细内容 */
+  text: string
+  /** 预警类型 ID */
+  type: string
+  /** 预警类型名称 */
+  typeName: string
+  /** 预警等级，颜色标识：蓝色/黄色/橙色/红色 */
+  severity: string
+  /** 预警等级颜色 */
+  severityColor: string
+}
+
+/** 天气预警 API 响应结构 */
+export interface WeatherWarningResponse {
+  /** API 状态码，"200" 表示成功，"204" 表示当前无预警 */
+  code: string
+  /** 预警信息数组 */
+  warning?: WeatherWarning[]
+}
+
+/** 空气质量数据 */
+export interface AirQualityData {
+  /** 数据更新时间 */
+  pubTime: string
+  /** AQI 指数 */
+  aqi: string
+  /** 空气质量等级，如 "优" */
+  level: string
+  /** 空气质量等级颜色 */
+  category: string
+  /** 首要污染物 */
+  primary: string
+  /** PM10 */
+  pm10: string
+  /** PM2.5 */
+  pm2p5: string
+  /** 二氧化氮 */
+  no2: string
+  /** 二氧化硫 */
+  so2: string
+  /** 一氧化碳 */
+  co: string
+  /** 臭氧 */
+  o3: string
+}
+
+/** 空气质量 API 响应结构 */
+export interface AirQualityResponse {
+  /** API 状态码，"200" 表示成功 */
+  code: string
+  /** 数据更新时间 */
+  updateTime: string
+  /** 实时空气质量数据 */
+  now: AirQualityData
+}

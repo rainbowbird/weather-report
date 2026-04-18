@@ -104,7 +104,8 @@ const weatherIcon = computed(() => mapWeatherIcon(props.weather.icon))
 .weather-icon {
   font-size: 56px;
   margin-top: 8px;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 .weather-desc {
