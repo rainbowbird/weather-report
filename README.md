@@ -54,7 +54,7 @@ docker run -d -p 8080:80 --name weather-report weather-report
 ## 📋 TODO
 
 - [ ] **GitHub Actions CI/CD**：配置自动构建 Docker 镜像并推送到 Docker Hub
-- [ ] **天气图标优化**：使用 SVG 或 Lottie 动画替代 Emoji，提升视觉效果
+- [x] **天气图标优化**：使用 SVG 动画替代 Emoji，提升视觉效果
 - [ ] **更多天气数据**：添加小时预报、日出日落时间、紫外线指数等
 - [ ] **PWA 支持**：添加 Service Worker，支持离线访问和安装到桌面
 - [ ] **国际化**：支持多语言切换
