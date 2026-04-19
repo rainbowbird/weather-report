@@ -11,7 +11,8 @@ interface Props {
 const props = defineProps<Props>()
 
 const forecastList = computed(() => {
-  return props.daily.map((day) => {
+  // 去掉第一天（当天），只显示未来6天
+  return props.daily.slice(1).map((day) => {
     const { date, weekday } = formatDate(day.fxDate)
     const { icon } = mapWeatherIcon(day.iconDay)
     return {
@@ -26,7 +27,7 @@ const forecastList = computed(() => {
 
 <template>
   <div class="forecast-list">
-    <div class="forecast-header">未来 7 天预报</div>
+    <div class="forecast-header">未来 6 天预报</div>
     <div class="forecast-scroll">
       <div
         v-for="(day, index) in forecastList"
@@ -65,6 +66,7 @@ const forecastList = computed(() => {
 
 .forecast-scroll {
   display: flex;
+  justify-content: space-between;
   gap: 14px;
   overflow-x: auto;
   padding: 8px 4px 20px;
@@ -160,6 +162,10 @@ const forecastList = computed(() => {
 }
 
 @media (max-width: 600px) {
+  .forecast-scroll {
+    justify-content: flex-start;
+  }
+
   .forecast-card {
     width: 96px;
     padding: 16px 10px;

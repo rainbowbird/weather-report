@@ -18,6 +18,7 @@ const weatherIcon = computed(() => mapWeatherIcon(props.weather.icon))
 <template>
   <div class="current-weather">
     <div class="city-name">{{ city.name }}</div>
+    <div class="current-date">{{ new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' }) }}</div>
     <div class="main-info">
       <span class="temperature">{{ weather.temp }}</span>
       <span class="unit">°C</span>
@@ -74,7 +75,15 @@ const weatherIcon = computed(() => mapWeatherIcon(props.weather.icon))
 .city-name {
   font-size: 28px;
   font-weight: 600;
+  margin-bottom: 4px;
+  text-shadow: var(--weather-text-shadow);
+}
+
+.current-date {
+  font-size: 16px;
+  font-weight: 400;
   margin-bottom: 12px;
+  opacity: 0.85;
   text-shadow: var(--weather-text-shadow);
 }
 
