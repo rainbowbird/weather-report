@@ -1,3 +1,8 @@
+/**
+ * 全局基础样式
+ * 应用级别的 reset 和默认设置
+ */
+
 :root {
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.5;
