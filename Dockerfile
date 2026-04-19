@@ -11,8 +11,9 @@ RUN npm ci
 COPY . .
 
 # 通过构建参数注入环境变量，动态生成 .env 文件
+# 必须传入：VITE_QWEATHER_KEY 和 VITE_QWEATHER_API_BASE
 ARG VITE_QWEATHER_KEY
-ARG VITE_QWEATHER_API_BASE=https://devapi.qweather.com
+ARG VITE_QWEATHER_API_BASE
 
 RUN echo "VITE_QWEATHER_KEY=${VITE_QWEATHER_KEY}" > .env && \
     echo "VITE_QWEATHER_API_BASE=${VITE_QWEATHER_API_BASE}" >> .env

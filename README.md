@@ -28,7 +28,9 @@ npm install
 
 # 配置环境变量
 cp .env.example .env
-# 编辑 .env，填入你的和风天气 API Key
+# 编辑 .env，填入：
+# - VITE_QWEATHER_KEY：你的和风天气 API Key
+# - VITE_QWEATHER_API_BASE：你的专属 API Host（格式如 https://xxxxxx.re.qweatherapi.com）
 
 # 启动开发服务器
 npm run dev
@@ -37,9 +39,10 @@ npm run dev
 ## 🐳 Docker 部署
 
 ```bash
-# 构建镜像
+# 构建镜像（需要传入 API Key 和专属 API Host）
 docker build \
   --build-arg VITE_QWEATHER_KEY=your_api_key \
+  --build-arg VITE_QWEATHER_API_BASE=https://your-api-host.re.qweatherapi.com \
   -t weather-report .
 
 # 运行容器

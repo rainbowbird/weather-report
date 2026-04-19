@@ -1,15 +1,16 @@
 import axios from 'axios'
-import { QWEATHER_KEY } from '@/utils/env'
-
-/** 和风天气专属 API Host */
-const BASE_API = 'https://your-api-host.re.qweatherapi.com'
+import { QWEATHER_KEY, QWEATHER_API_BASE } from '@/utils/env'
 
 /**
  * 用于地理位置查询的 axios 实例
  * 自动在请求头中注入 API Key
  */
+/**
+ * 用于地理位置查询的 axios 实例
+ * 自动在请求头中注入 API Key
+ */
 export const geoRequest = axios.create({
-  baseURL: BASE_API,
+  baseURL: QWEATHER_API_BASE,
   timeout: 10000,
   proxy: false,
 })
@@ -19,7 +20,7 @@ export const geoRequest = axios.create({
  * 自动在请求头中注入 API Key
  */
 export const weatherRequest = axios.create({
-  baseURL: BASE_API,
+  baseURL: QWEATHER_API_BASE,
   timeout: 10000,
   proxy: false,
 })
