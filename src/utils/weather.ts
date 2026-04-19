@@ -6,46 +6,46 @@
 export type WeatherType = 'sunny' | 'cloudy' | 'rainy' | 'snowy' | 'foggy' | 'default'
 
 /**
- * 将和风天气 icon 代码映射为 Emoji 图标和背景类型
+ * 将和风天气 icon 代码映射为背景类型
  * @param iconCode 和风天气图标代码，如 "100"、"305"
- * @returns { icon: string, type: WeatherType }
+ * @returns 天气类型
  */
-export function mapWeatherIcon(iconCode: string): { icon: string; type: WeatherType } {
+export function mapWeatherIcon(iconCode: string): WeatherType {
   const code = Number(iconCode)
 
   // 晴 / 晴间多云 / 少云
   if ([100, 102, 103, 150, 151, 152, 800].includes(code)) {
-    return { icon: '☀️', type: 'sunny' }
+    return 'sunny'
   }
 
   // 多云 / 阴
   if ([101, 104, 153, 154].includes(code)) {
-    return { icon: '☁️', type: 'cloudy' }
+    return 'cloudy'
   }
 
   // 雨 / 阵雨 / 雷阵雨 / 暴雨 等
   if (
     [300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 350, 351, 399].includes(code)
   ) {
-    return { icon: '🌧️', type: 'rainy' }
+    return 'rainy'
   }
 
   // 雪 / 雨夹雪 / 暴雪 等
   if (
     [400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 456, 457, 499].includes(code)
   ) {
-    return { icon: '❄️', type: 'snowy' }
+    return 'snowy'
   }
 
   // 雾 / 霾 / 沙尘 等
   if (
     [500, 501, 502, 503, 504, 507, 508, 509, 510, 511, 512, 513, 514, 515].includes(code)
   ) {
-    return { icon: '🌫️', type: 'foggy' }
+    return 'foggy'
   }
 
   // 未知 / 其他
-  return { icon: '🌡️', type: 'default' }
+  return 'default'
 }
 
 /**

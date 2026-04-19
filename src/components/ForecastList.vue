@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import type { DailyWeather } from '@/types/weather'
 import { mapWeatherIcon, formatDate } from '@/utils/weather'
+import WeatherIcon from './WeatherIcon.vue'
 
 interface Props {
   /** 7 天每日天气预报数组 */
@@ -14,12 +15,12 @@ const forecastList = computed(() => {
   // 去掉第一天（当天），只显示未来6天
   return props.daily.slice(1).map((day) => {
     const { date, weekday } = formatDate(day.fxDate)
-    const { icon } = mapWeatherIcon(day.iconDay)
+    const type = mapWeatherIcon(day.iconDay)
     return {
       ...day,
       date,
       weekday,
-      icon,
+      type,
     }
   })
 })
@@ -37,7 +38,9 @@ const forecastList = computed(() => {
       >
         <div class="forecast-weekday">{{ day.weekday }}</div>
         <div class="forecast-date">{{ day.date }}</div>
-        <div class="forecast-icon">{{ day.icon }}</div>
+        <div class="forecast-icon">
+          <WeatherIcon :type="day.type" :size="36" />
+        </div>
         <div class="forecast-text">{{ day.textDay }}</div>
         <div class="forecast-temp">
           <span class="temp-high">{{ day.tempMax }}°</span>
@@ -131,10 +134,10 @@ const forecastList = computed(() => {
 }
 
 .forecast-icon {
-  font-size: 36px;
   margin-bottom: 8px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .forecast-text {

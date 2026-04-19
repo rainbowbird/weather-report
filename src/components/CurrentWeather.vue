@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import type { CityItem, CurrentWeatherData } from '@/types/weather'
 import { mapWeatherIcon } from '@/utils/weather'
+import WeatherIcon from './WeatherIcon.vue'
 
 interface Props {
   /** 当前城市信息 */
@@ -12,7 +13,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const weatherIcon = computed(() => mapWeatherIcon(props.weather.icon))
+const weatherType = computed(() => mapWeatherIcon(props.weather.icon))
 </script>
 
 <template>
@@ -22,7 +23,7 @@ const weatherIcon = computed(() => mapWeatherIcon(props.weather.icon))
     <div class="main-info">
       <span class="temperature">{{ weather.temp }}</span>
       <span class="unit">°C</span>
-      <span class="weather-icon">{{ weatherIcon.icon }}</span>
+      <WeatherIcon :type="weatherType" :size="64" class="main-weather-icon" />
     </div>
     <div class="weather-desc">{{ weather.text }}</div>
 
@@ -110,11 +111,8 @@ const weatherIcon = computed(() => mapWeatherIcon(props.weather.icon))
   opacity: 0.9;
 }
 
-.weather-icon {
-  font-size: 56px;
+.main-weather-icon {
   margin-top: 8px;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 .weather-desc {

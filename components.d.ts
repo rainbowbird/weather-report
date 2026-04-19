@@ -16,5 +16,6 @@ declare module 'vue' {
     ForecastList: typeof import('./src/components/ForecastList.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     WeatherBackground: typeof import('./src/components/WeatherBackground.vue')['default']
+    WeatherIcon: typeof import('./src/components/WeatherIcon.vue')['default']
   }
 }

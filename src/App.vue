@@ -21,7 +21,7 @@ const loading = ref(false)
 /** 根据实时天气决定背景类型 */
 const weatherType = computed(() => {
   if (currentWeather.value) {
-    return mapWeatherIcon(currentWeather.value.icon).type
+    return mapWeatherIcon(currentWeather.value.icon)
   }
   return 'default'
 })
