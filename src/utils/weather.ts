@@ -92,12 +92,14 @@ export function getWeatherGradient(type: WeatherType, temp: number = 20): string
 }
 
 /**
- * 判断天气背景是否为浅色（浅色背景下需使用深色文字以获得更好对比度）
+ * 判断天气背景是否为浅色
+ * 所有天气类型的渐变均采用明亮色调，统一按浅色背景处理
  * @param type 天气背景类型
  * @returns 是否为浅色背景
  */
-export function isLightBackground(type: WeatherType): boolean {
-  return ['sunny', 'cloudy', 'snowy', 'foggy', 'default'].includes(type)
+export function isLightBackground(_type: WeatherType): boolean {
+  // 所有背景渐变均为明亮色调，统一返回 true
+  return true
 }
 
 /**
