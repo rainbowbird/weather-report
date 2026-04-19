@@ -49,19 +49,45 @@ export function mapWeatherIcon(iconCode: string): { icon: string; type: WeatherT
 }
 
 /**
- * 获取天气背景类型的 CSS 渐变定义
+ * 根据天气类型和温度获取 CSS 渐变定义
+ * 温度会影响色调：低温偏冷色，高温偏暖色
  * @param type 天气背景类型
+ * @param temp 当前温度（摄氏度）
  * @returns CSS linear-gradient 值
  */
-export function getWeatherGradient(type: WeatherType): string {
-  const gradients: Record<WeatherType, string> = {
-    sunny: 'linear-gradient(135deg, #ffe29f 0%, #ffa751 50%, #ff7eb3 100%)',
-    cloudy: 'linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #667eea 100%)',
-    rainy: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #434343 100%)',
-    snowy: 'linear-gradient(135deg, #e6e9f0 0%, #eef1f5 50%, #89f7fe 100%)',
-    foggy: 'linear-gradient(135deg, #cfd9df 0%, #e2ebf0 50%, #a8edea 100%)',
-    default: 'linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #4facfe 100%)',
+export function getWeatherGradient(type: WeatherType, temp: number = 20): string {
+  // 根据温度区间选择色调
+  const getTempHue = (): { warm: string; cool: string } => {
+    if (temp < 10) {
+      // 寒冷：偏紫蓝冷色调
+      return { warm: '#9bb5ff', cool: '#c3b5e0' }
+    } else if (temp < 20) {
+      // 凉爽：偏清爽蓝绿
+      return { warm: '#a1c4fd', cool: '#c2e9fb' }
+    } else if (temp < 28) {
+      // 舒适：清新天蓝
+      return { warm: '#89f7fe', cool: '#66a6ff' }
+    } else if (temp < 35) {
+      // 炎热：偏暖黄橙
+      return { warm: '#ffe29f', cool: '#ffa751' }
+    } else {
+      // 酷热：偏红橙
+      return { warm: '#ff9a9e', cool: '#fecfef' }
+    }
   }
+
+  const { warm, cool } = getTempHue()
+
+  // 天气类型 + 温度 的组合渐变
+  const gradients: Record<WeatherType, string> = {
+    sunny: `linear-gradient(135deg, ${warm} 0%, #ff7eb3 50%, #ff9a9e 100%)`,
+    cloudy: `linear-gradient(135deg, ${warm} 0%, ${cool} 50%, #667eea 100%)`,
+    rainy: `linear-gradient(135deg, ${cool} 0%, #4facfe 50%, ${warm} 100%)`,
+    snowy: `linear-gradient(135deg, #e6e9f0 0%, ${cool} 50%, ${warm} 100%)`,
+    foggy: `linear-gradient(135deg, #cfd9df 0%, ${cool} 50%, ${warm} 100%)`,
+    default: `linear-gradient(135deg, ${warm} 0%, #f5576c 50%, ${cool} 100%)`,
+  }
+
   return gradients[type]
 }
 

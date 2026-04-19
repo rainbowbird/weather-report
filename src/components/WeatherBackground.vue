@@ -6,12 +6,14 @@ import { getWeatherGradient } from '@/utils/weather'
 interface Props {
   /** 当前天气类型，决定背景渐变 */
   type: WeatherType
+  /** 当前温度（摄氏度），影响色调冷暖 */
+  temp: number
 }
 
 const props = defineProps<Props>()
 
 const backgroundStyle = computed(() => ({
-  background: getWeatherGradient(props.type),
+  background: getWeatherGradient(props.type, props.temp),
 }))
 </script>
 

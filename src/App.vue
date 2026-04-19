@@ -115,7 +115,7 @@ init()
 </script>
 
 <template>
-  <WeatherBackground :type="weatherType" />
+  <WeatherBackground :type="weatherType" :temp="Number(currentWeather?.temp || 20)" />
 
   <div id="app" class="weather-app">
     <Spin :spinning="loading" size="large">
