@@ -11,7 +11,7 @@ interface Props {
   selectedCityId?: string
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const emit = defineEmits<{
   (e: 'select', city: CityItem): void
